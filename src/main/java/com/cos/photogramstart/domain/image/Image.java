@@ -24,7 +24,7 @@ public class Image {
 
     private String postImageUrl;    //  사진을 전송받아서 그 사진을 서버에 특정 폴더에 저장 -DB에 그 저장된 경로를 INSERT
 
-   @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
 
@@ -34,4 +34,5 @@ public class Image {
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
+
 }
