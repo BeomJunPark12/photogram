@@ -37,11 +37,11 @@ public class ImageService {
         String imageFileName = uuid + "_" +  imageUploadDto.getFile().getOriginalFilename();  // 1.jpg
         System.out.println("이미지 파일이름: " + imageFileName);
 
-        Path imageFilepath = Paths.get(uploadFolder + imageFileName);
+        Path imageFilePath = Paths.get(uploadFolder + imageFileName);
 
         // 통신, I/O -> 예외가 발생할 수 있다.
         try {
-            Files.write(imageFilepath, imageUploadDto.getFile().getBytes());
+            Files.write(imageFilePath, imageUploadDto.getFile().getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
