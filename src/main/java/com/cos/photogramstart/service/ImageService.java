@@ -6,6 +6,8 @@ import com.cos.photogramstart.domain.image.ImageRepository;
 import com.cos.photogramstart.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,15 +23,14 @@ import java.util.UUID;
 public class ImageService {
 
     private final ImageRepository imageRepository;
-
-    @Transactional(readOnly = true)
-    public List<Image> 이미지스토리(int principalId) {
-        List<Image> images = imageRepository.mStory(principalId);
-        return images;
-    }
-
     @Value("${file.path}")
     private String uploadFolder;
+
+    @Transactional(readOnly = true)
+    public Page<Image> 이미지스토리(int principalId, Pageable pageable) {
+        Page<Image> images = imageRepository.mStory(principalId, pageable);
+        return images;
+    }
 
     @Transactional
     public void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
